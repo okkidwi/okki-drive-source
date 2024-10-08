@@ -1,0 +1,32 @@
+name: Sinkronkan JSON
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  update-json:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repositori
+        uses: actions/checkout@v2
+
+      - name: Mengambil data fitgirl.json
+        run: curl -o fitgirl.json https://hydralinks.cloud/sources/fitgirl.json
+
+      - name: Mengambil data steamrip.json
+        run: curl -o steamrip.json https://hydralinks.cloud/sources/steamrip.json
+
+      - name: Mengambil data dodi.json
+        run: curl -o dodi.json https://hydralinks.cloud/sources/dodi.json
+
+      - name: Mengambil data gog.json
+        run: curl -o gog.json https://hydralinks.cloud/sources/gog.json
+
+      - name: Commit dan Push Perubahan
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add fitgirl.json steamrip.json dodi.json gog.json
+          git commit -m "Memperbarui file JSON dari sumber"
+          git push
