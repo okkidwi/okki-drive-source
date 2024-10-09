@@ -34,3 +34,4 @@ jobs:
             git push
           else
             echo "Tidak ada perubahan, skip commit"
+          fi
