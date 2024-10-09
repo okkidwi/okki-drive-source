@@ -24,10 +24,13 @@ jobs:
       - name: Mengambil data gog.json
         run: curl -o gog.json https://hydralinks.cloud/sources/gog.json
 
-      - name: Commit dan Push Perubahan
+      - name: Periksa apakah ada perubahan
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add fitgirl.json steamrip.json dodi.json gog.json
-          git commit -m "Memperbarui file JSON dari sumber" --allow-empty
-          git push
+          if [[ `git status --porcelain` ]]; then
+            git config --global user.name "github-actions[bot]"
+            git config --global user.email "github-actions[bot]@users.noreply.github.com"
+            git add fitgirl.json steamrip.json dodi.json gog.json
+            git commit -m "Memperbarui file JSON dari sumber"
+            git push
+          else
+            echo "Tidak ada perubahan, skip commit"
