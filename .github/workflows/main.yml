@@ -25,7 +25,7 @@ jobs:
         run: curl -o gog.json https://hydralinks.cloud/sources/gog.json
 
       - name: Mengambil data 1337x.to.json
-        run: curl -o gog.json https://torrents.starserv.net/torrents/sources/1337x
+        run: curl -o 1337x.to.json https://torrents.starserv.net/torrents/sources/1337x
         
       - name: Periksa apakah ada perubahan
         run: |
